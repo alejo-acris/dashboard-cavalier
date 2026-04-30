@@ -7,7 +7,7 @@ import DailyBarChart from "@/components/DailyBarChart";
 import RechargeButton from "@/components/RechargeButton";
 import { BotMessageSquare, Settings } from 'lucide-react';
 
-export default function DashboardView({ locationId, initialData }) {
+export default function DashboardView({ locationId, userContext, initialData }) {
   const { data, history } = initialData;
 
   return (
@@ -25,7 +25,7 @@ export default function DashboardView({ locationId, initialData }) {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <RechargeButton locationId={locationId} />
+          <RechargeButton locationId={locationId} userContext={userContext} data={data} />
         </div>
       </header>
 
