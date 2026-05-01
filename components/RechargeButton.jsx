@@ -163,7 +163,7 @@ export default function RechargeButton({ locationId, userContext, data }) {
               <div className="flex flex-wrap items-center justify-center gap-6">
                 <div className="flex items-center gap-2 opacity-60 grayscale hover:grayscale-0 transition-all">
                   <CreditCard className="w-5 h-5 text-slate-300" />
-                  <span className="text-xs font-bold text-slate-400 hidden sm:inline">Tarjetas, Transferencia, Nequi</span>
+                  <span className="text-xs font-bold text-slate-400 hidden sm:inline">Tarjetas de Crédito / Débito</span>
                 </div>
                 <div className="flex items-center gap-1.5 text-emerald-500/80">
                   <ShieldCheck className="w-4 h-4" />

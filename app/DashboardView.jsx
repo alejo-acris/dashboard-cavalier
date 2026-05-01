@@ -32,27 +32,46 @@ export default function DashboardView({ locationId, userContext, initialData }) 
       {/* Main Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        {/* Left Column: Gauge and Status */}
+        {/* Left Column: Gauge and Breakdown */}
         <div className="lg:col-span-4 flex flex-col gap-8">
           <GaugeChart percentage={data.percentage} consumed={data.messages_consumed} limit={data.messages_limit} />
           
           <div className="bg-slate-900 rounded-2xl p-6 border border-slate-800 shadow-md">
-            <h3 className="text-slate-400 text-sm font-medium tracking-wide border-b border-slate-800 pb-4 mb-4">ESTADO DE CUENTA</h3>
-            <div className="flex items-center justify-between">
-              <span className="text-slate-300">Status</span>
-              <span className={`px-3 py-1 rounded-full text-xs font-semibold 
-                ${data.status === 'Active' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 
-                  data.status === 'Warning' ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' : 
-                  'bg-red-500/10 text-red-400 border border-red-500/20'}`}>
-                {data.status.toUpperCase()}
-              </span>
+            <h3 className="text-slate-400 text-sm font-medium tracking-wide border-b border-slate-800 pb-4 mb-4 uppercase">Desglose de Mensajes</h3>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">📦</span>
+                  <span className="text-slate-300">Plan base</span>
+                </div>
+                <span className="text-white font-semibold">{(data.base_limit || 0).toLocaleString()}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">💎</span>
+                  <span className="text-slate-300">Créditos extras</span>
+                </div>
+                <span className="text-white font-semibold">{(data.extra_credits || 0).toLocaleString()}</span>
+              </div>
+              <div className="pt-4 border-t border-slate-800 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">📊</span>
+                  <span className="text-slate-300 font-medium">Total disponible</span>
+                </div>
+                <span className="text-blue-400 font-bold">{(data.messages_limit || 0).toLocaleString()}</span>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Right Column: Stats, Charts, Breakdown */}
+        {/* Right Column: Stats and Charts */}
         <div className="lg:col-span-8 flex flex-col gap-8">
-          <StatsGrid consumed={data.messages_consumed} limit={data.messages_limit} renewalDate={data.renewal_date} />
+          <StatsGrid 
+            consumed={data.messages_consumed} 
+            limit={data.messages_limit} 
+            renewalDate={data.renewal_date} 
+            status={data.status}
+          />
           
           <DailyBarChart history={history} />
         </div>
